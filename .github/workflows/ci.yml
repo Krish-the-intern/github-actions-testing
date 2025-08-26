@@ -1,14 +1,36 @@
 name: Node.js CI
 
-on: [push, pull_request]
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch: {}   # lets you run it manually from Actions
 
 jobs:
   test:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+
+      - name: Setup Node (with cache)
+        uses: actions/setup-node@v4
         with:
           node-version: '18'
-      - run: npm ci
-      - run: npm test
+          cache: 'npm'                    # caches by package-lock.json
+
+      - name: Harden npm networking
+        run: |
+          npm config set fetch-retries 5
+          npm config set fetch-retry-mintimeout 20000
+          npm config set fetch-retry-maxtimeout 120000
+          npm config set audit false
+          npm config set fund false
+
+      - name: Install deps
+        run: npm ci --no-audit --no-fund   # use `npm install` if you prefer
+
+      - run: echo "🎉 Running GitHub Actions for ${{ github.actor }}"
+
+      - name: Run tests
+        run: npm test
