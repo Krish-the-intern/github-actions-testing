@@ -1,0 +1,23 @@
+{
+  "name": "github-actions-testing",
+  "version": "1.0.0",
+  "main": "hello.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Krish-the-intern/github-actions-testing.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Krish-the-intern/github-actions-testing/issues"
+  },
+  "homepage": "https://github.com/Krish-the-intern/github-actions-testing#readme",
+  "description": "",
+  "devDependencies": {
+    "jest": "^30.0.5"
+  }
+}
