@@ -1,6 +1,5 @@
 function add(a, b) {
-  // BUG on purpose: adds as-is (fails if strings)
-  return a + b;
+  return Number(a) + Number(b);   // force numeric addition
 }
 
 function safeAdd(a, b) {
